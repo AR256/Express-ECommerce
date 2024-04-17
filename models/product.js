@@ -1,29 +1,29 @@
 const mongoose = require('mongoose');
 let productSchema = mongoose.Schema({
-    name:{
-        type:String,
-        unique:true,
-        required:true,
-        minLength:3,
+    name: {
+        type: String,
+        unique: true,
+        required: true,
+        minLength: 3,
     },
-    description:{
-        type:String,
-        required:true,
-        minLength:3,
+    description: {
+        type: String,
+        required: true,
+        minLength: 3,
     },
-    photo: 
-    { 
+    photo:
+    {
         type: String
         , required: true
     },
-    seller: 
-    { 
+    seller:
+    {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Seller' 
+        ref: 'Seller'
     },
     creationDate:
     {
-        type:Date,
+        type: Date,
         default: Date.now
     }
 })

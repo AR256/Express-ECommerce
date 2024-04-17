@@ -6,12 +6,12 @@ const orderSchema = mongoose.Schema({
         default: Date.now
     },
     products: [{
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Product'
     }],
     user: {
-        type: Schema.Types.ObjectId,
-        ref: 'RegisteredUser'
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     }
 });
 

@@ -1,9 +1,9 @@
 const express = require('express');
-let router = express.Router();
-const {getAllSellers, getByName, saveSeller} = require('../controllers/seller');
-
-router.get('/', getAllSellers);
-router.get('/:name', getByName);
-router.post('/', saveSeller);
+const router = express.Router();
+const sellerController = require('../controllers/seller');
+const auth = require('../middlewares/auth');
+router.get('/', sellerController.getAllSellers);
+router.get('/:name', sellerController.getByName);
+router.post('/', auth.authenticateUser, auth.authorizeSeller, sellerController.createSeller);
 
 module.exports = router;
