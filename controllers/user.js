@@ -1,6 +1,6 @@
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
-const config = require('../config');
+require("dotenv/config");
 
 // Controller for registering a new user
 const registerUser = async (req, res) => {
@@ -26,7 +26,7 @@ const registerUser = async (req, res) => {
       }
     };
 
-    jwt.sign(payload, config.secretKey, { expiresIn: '1h' }, (err, token) => {
+    jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: '1h' }, (err, token) => {
       if (err) throw err;
       res.json({ token });
     });
@@ -60,7 +60,7 @@ const loginUser = async (req, res) => {
       }
     };
 
-    jwt.sign(payload, config.secretKey, { expiresIn: '1h' }, (err, token) => {
+    jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: '1h' }, (err, token) => {
       if (err) throw err;
       res.json({ token });
     });

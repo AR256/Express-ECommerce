@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const config = require('./config');
+require("dotenv/config");
 const productRoutes = require('./routes/product');
 const sellerRoutes = require('./routes/seller');
 const orderRoutes = require('./routes/order');
@@ -18,7 +18,7 @@ app.use('/orders', orderRoutes);
 app.use('/users', userRoutes);
 
 // Database connection
-mongoose.connect(config.mongoURI)
+mongoose.connect(process.env.MONGODB_URI)
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.error(err));
 
