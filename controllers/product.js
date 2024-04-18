@@ -1,13 +1,36 @@
 const Product = require('../models/product');
+const user = require('../models/user');
 
-const getAllProducts = async (req, res) => {
-  try {
-    const products = await Product.find();
-    res.json(products);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-};
+  const getAllProducts = async (req, res) => {
+    try {
+      const products = await Product.find();
+      res.json(products);
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  };
+  const getAuthProducts = async (req, res) => {
+    try {
+      let products;
+      if(req.query.hasOwnProperty('name'))
+      {
+        products = await Product.find({name:req.query.name}, {});
+      }
+      else if(req.query.hasOwnProperty('sname'))
+      {
+        const seller = await user.findOne({username:req.query.sname}, {});
+        products = await Product.find({seller:seller._id}, {});
+      }
+      else
+      {
+        products = await Product.find();
+      }
+      
+      res.json(products);
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  };
 const getProductById = async (req, res) => {
   res.json(res.product);
 }
@@ -71,4 +94,4 @@ const getProduct = async (req, res, next) => {
   res.product = product;
   next();
 }
-module.exports = { getAllProducts, getProductById, createProduct, updateProduct, deleteProduct, getProduct }
+module.exports = { getAllProducts, getProductById, createProduct, updateProduct, deleteProduct, getProduct, getAuthProducts }
