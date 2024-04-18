@@ -21,7 +21,7 @@ const getByName = async (req, res) => {
 }
 const createSeller = async (req, res) => {
   const seller = new Seller({
-    name: req.body.name
+    name: req.body.username
   });
 
   try {

@@ -16,15 +16,15 @@ let productSchema = mongoose.Schema({
         type: String
         , required: true
     },
-    seller:
-    {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Seller'
-    },
     creationDate:
     {
         type: Date,
         default: Date.now
+    },
+    seller:
+    {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Seller'
     }
 })
 productSchema.index({ name: 'text' });

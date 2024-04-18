@@ -16,10 +16,9 @@ const createProduct = async (req, res) => {
     name: req.body.name,
     description: req.body.description,
     photo: req.body.photo,
-    seller: req.user._id,
-    creationDate: req.body.creationDate
+    creationDate: req.body.creationDate,
+    seller: req.user.id
   });
-
   try {
     const newProduct = await product.save();
     res.status(201).json(newProduct);

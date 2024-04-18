@@ -4,6 +4,6 @@ const sellerController = require('../controllers/seller');
 const auth = require('../middlewares/auth');
 router.get('/', sellerController.getAllSellers);
 router.get('/:name', sellerController.getByName);
-router.post('/', auth.authenticateUser, auth.authorizeSeller, sellerController.createSeller);
+router.post('/', auth.authenticateUser, sellerController.createSeller);
 
 module.exports = router;
