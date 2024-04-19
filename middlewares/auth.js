@@ -23,7 +23,7 @@ const authorizeSeller = (req, res, next) => {
   if (req.user.role !== "seller") {
     return res.status(403).json({ message: "Unauthorized access" });
   }
-  if(req.params.id){
+  if(req.params.id !== undefined) {
     const sellerId = req.user.id; // Assuming the seller's ID is stored in req.user._id after authentication
     const productId = req.params.id; // Assuming the product ID is passed as a route parameter
     // Check if the product's seller matches the logged-in seller's ID

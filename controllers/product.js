@@ -3,7 +3,7 @@ const user = require("../models/user");
 
 const getAllProducts = async (req, res) => {
   try {
-    const products = await Product.find();
+    const products = await Product.find().populate('seller');
     res.json(products);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -13,12 +13,12 @@ const getAuthProducts = async (req, res) => {
   try {
     let products;
     if (req.query.hasOwnProperty("name")) {
-      products = await Product.find({ name: req.query.name }, {});
+      products = await Product.find({ name: req.query.name }, {}).populate('seller');
     } else if (req.query.hasOwnProperty("sname")) {
       const seller = await user.findOne({ username: req.query.sname }, {});
-      products = await Product.find({ seller: seller._id }, {});
+      products = await Product.find({ seller: seller._id }, {}).populate('seller');
     } else {
-      products = await Product.find();
+      products = await Product.find().populate('seller');
     }
 
     res.json(products);
@@ -77,7 +77,7 @@ const deleteProduct = async (req, res) => {
 const getProduct = async (req, res, next) => {
   let product;
   try {
-    product = await Product.findById(req.params.id);
+    product = await Product.findById(req.params.id).populate('seller');
     if (product == null) {
       return res.status(404).json({ message: "Product not found" });
     }

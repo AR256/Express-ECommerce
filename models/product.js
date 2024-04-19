@@ -21,7 +21,7 @@ let productSchema = mongoose.Schema({
   },
   seller: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Seller",
+    ref: "Seller"
   },
 });
 productSchema.index({ name: "text" });
