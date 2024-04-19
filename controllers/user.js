@@ -85,7 +85,38 @@ const loginUser = async (req, res) => {
   }
 };
 
+const editUser = async (req, res) => {
+  const { username, email, role } = req.body;
+  console.log(req.user);
+  if (req.user.id !== req.params.id)
+    return res.status(403).json({ message: "Invalid user" });
+  try {
+    res.user = await User.findById(req.params.id);
+    if (!res.user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+  if (username) {
+    res.user.username = username;
+  }
+  if (email) {
+    res.user.email = email;
+  }
+  if (role) {
+    res.user.role = role;
+  }
+  try {
+    const updatedUser = await res.user.save();
+    res.json(updatedUser);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
+
 module.exports = {
   registerUser,
   loginUser,
+  editUser,
 };

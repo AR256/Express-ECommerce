@@ -1,4 +1,4 @@
-const Order = require('../models/order');
+const Order = require("../models/order");
 
 // Get all orders
 const getAllOrders = async (req, res) => {
@@ -24,7 +24,7 @@ const getOrdersByUser = async (req, res) => {
 const createOrder = async (req, res) => {
   const order = new Order({
     products: req.body.products,
-    user: req.user._id
+    user: req.user._id,
   });
 
   try {
@@ -38,5 +38,5 @@ const createOrder = async (req, res) => {
 module.exports = {
   getAllOrders,
   getOrdersByUser,
-  createOrder
+  createOrder,
 };

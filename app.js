@@ -1,10 +1,10 @@
-const express = require('express');
-const mongoose = require('mongoose');
+const express = require("express");
+const mongoose = require("mongoose");
 require("dotenv/config");
-const productRoutes = require('./routes/product');
-const sellerRoutes = require('./routes/seller');
-const orderRoutes = require('./routes/order');
-const userRoutes = require('./routes/user');
+const productRoutes = require("./routes/product");
+const sellerRoutes = require("./routes/seller");
+const orderRoutes = require("./routes/order");
+const userRoutes = require("./routes/user");
 
 const app = express();
 
@@ -12,15 +12,16 @@ const app = express();
 app.use(express.json());
 
 // Routes
-app.use('/products', productRoutes);
-app.use('/sellers', sellerRoutes);
-app.use('/orders', orderRoutes);
-app.use('/users', userRoutes);
+app.use("/products", productRoutes);
+app.use("/sellers", sellerRoutes);
+app.use("/orders", orderRoutes);
+app.use("/users", userRoutes);
 
 // Database connection
-mongoose.connect(process.env.MONGODB_URI)
-    .then(() => console.log('MongoDB connected'))
-    .catch(err => console.error(err));
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => console.log("MongoDB connected"))
+  .catch((err) => console.error(err));
 
 // Start server
 const PORT = 3000;
