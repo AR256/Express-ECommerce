@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const productController = require("../controllers/product");
 const auth = require("../middlewares/auth");
+
 router.get("/auth", auth.authenticateUser, productController.getAuthProducts);
 router.get("/", productController.getAllProducts);
 router.get(
@@ -14,6 +15,7 @@ router.post(
   "/auth",
   auth.authenticateUser,
   auth.authorizeSeller,
+  productController.upload.single('photo'),
   productController.createProduct
 );
 router.put(

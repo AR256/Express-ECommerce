@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require('cors');
 require("dotenv/config");
 const productRoutes = require("./routes/product");
 const sellerRoutes = require("./routes/seller");
@@ -9,6 +10,7 @@ const userRoutes = require("./routes/user");
 const app = express();
 
 // Middleware
+app.use(cors());
 app.use(express.json());
 
 // Routes

@@ -1,21 +1,20 @@
 const mongoose = require("mongoose");
 
-const orderSchema = mongoose.Schema({
-  createdDate: {
-    type: Date,
-    default: Date.now,
-  },
-  products: [
-    {
+const orderSchema = mongoose.Schema(
+  {
+    products: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Product",
+      },
+    ],
+    user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Product",
+      ref: "User",
     },
-  ],
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
   },
-});
+  { timestamps: true }
+);
 
 const Order = mongoose.model("Order", orderSchema);
 

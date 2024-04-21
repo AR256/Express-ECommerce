@@ -14,16 +14,14 @@ let productSchema = mongoose.Schema({
   photo: {
     type: String,
     required: true,
-  },
-  creationDate: {
-    type: Date,
-    default: Date.now,
+    default: "/images/users/default.png"
   },
   seller: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Seller"
   },
-});
+},
+{ timestamps: true });
 productSchema.index({ name: "text" });
 
 module.exports = mongoose.model("Product", productSchema);

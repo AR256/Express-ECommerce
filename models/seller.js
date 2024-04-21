@@ -7,7 +7,8 @@ let sellerSchema = mongoose.Schema({
     required: true,
     minLength: 3,
   },
-});
+},
+{ timestamps: true });
 sellerSchema.index({ name: "text" });
 
 module.exports = mongoose.model("Seller", sellerSchema);

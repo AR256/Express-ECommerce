@@ -2,6 +2,21 @@ const User = require("../models/user");
 const { createSeller } = require("../controllers/seller");
 const jwt = require("jsonwebtoken");
 require("dotenv/config");
+const multer = require('multer');
+const path = require('path');
+let imagePath;
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, './images/users/')
+  },
+  filename: (req, file, cb) => {
+      console.log(file);
+      imagePath = Date.now() + req.user.id + path.extname(file.originalname);
+      cb(null, imagePath)
+  }
+
+});
+const upload = multer({storage: storage })
 
 // Controller for registering a new user
 const registerUser = async (req, res) => {
@@ -119,4 +134,5 @@ module.exports = {
   registerUser,
   loginUser,
   editUser,
+  upload
 };

@@ -1,5 +1,20 @@
 const Product = require("../models/product");
 const user = require("../models/user");
+const multer = require('multer');
+const path = require('path');
+let imagePath;
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, './images/products/')
+  },
+  filename: (req, file, cb) => {
+      console.log(file);
+      imagePath = `${req.body.name.replace(" ", "")}_${req.user.id}_${Date.now()}` + path.extname(file.originalname);
+      cb(null, imagePath)
+  }
+
+});
+const upload = multer({storage: storage })
 
 const getAllProducts = async (req, res) => {
   try {
@@ -33,9 +48,8 @@ const createProduct = async (req, res) => {
   const product = new Product({
     name: req.body.name,
     description: req.body.description,
-    photo: req.body.photo,
-    creationDate: req.body.creationDate,
-    seller: req.user.id,
+    photo: '/images/products/' + imagePath,
+    seller: req.user.id
   });
   try {
     const newProduct = await product.save();
@@ -96,4 +110,5 @@ module.exports = {
   deleteProduct,
   getProduct,
   getAuthProducts,
+  upload
 };
