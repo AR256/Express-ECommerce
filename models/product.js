@@ -20,6 +20,11 @@ let productSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Seller"
   },
+  price:{
+    type: Number,
+    required: true,
+    default: 10
+  }
 },
 { timestamps: true });
 productSchema.index({ name: "text" });

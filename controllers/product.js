@@ -49,7 +49,8 @@ const createProduct = async (req, res) => {
     name: req.body.name,
     description: req.body.description,
     photo: '/images/products/' + imagePath,
-    seller: req.user.id
+    seller: req.user.id,
+    price: req.body.price
   });
   try {
     const newProduct = await product.save();
@@ -70,6 +71,9 @@ const updateProduct = async (req, res) => {
   }
   if (req.body.seller != null) {
     res.product.seller = req.body.seller;
+  }
+  if (req.body.price != null) {
+    res.product.price = req.body.price;
   }
   try {
     const updatedProduct = await res.product.save();
