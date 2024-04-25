@@ -10,7 +10,22 @@ const userSchema = new mongoose.Schema(
     image: {
       type: String,
       required: true,
-      default: "/images/users/default.png"
+      default: "/images/users/default.png",
+    },
+    phone: {
+      type: String,
+    },
+    age: {
+      type: Number,
+      min: 12,
+    },
+    address: String,
+    city: String,
+    cart: {
+      totalPrice: {
+        type: Number,
+        default: 0,
+      },
     },
   },
   { timestamps: true }

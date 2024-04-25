@@ -24,6 +24,14 @@ let productSchema = mongoose.Schema({
     type: Number,
     required: true,
     default: 10
+  },
+  productQuantity: {
+    type: Number,
+    default: 1,
+  },
+  category: {
+    type: String,
+    required: true,
   }
 },
 { timestamps: true });

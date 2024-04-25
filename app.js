@@ -16,10 +16,10 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-app.use("/products", productRoutes);
-app.use("/sellers", sellerRoutes);
-app.use("/orders", orderRoutes);
-app.use("/users", userRoutes);
+app.use("api/v1/products", productRoutes);
+app.use("api/v1/sellers", sellerRoutes);
+app.use("api/v1/orders", orderRoutes);
+app.use("api/v1/users", userRoutes);
 
 // Database connection
 mongoose

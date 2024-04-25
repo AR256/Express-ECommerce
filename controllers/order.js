@@ -4,7 +4,10 @@ const Order = require("../models/order");
 const getAllOrders = async (req, res) => {
   try {
     const orders = await Order.find();
-    res.json(orders);
+    res.json({
+      status: "success",
+      data: orders,
+    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -14,7 +17,10 @@ const getAllOrders = async (req, res) => {
 const getOrdersByUser = async (req, res) => {
   try {
     const orders = await Order.find({ user: req.params.userId });
-    res.json(orders); 
+    res.json({
+      status: "success",
+      data: orders,
+    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -29,7 +35,10 @@ const createOrder = async (req, res) => {
 
   try {
     const newOrder = await order.save();
-    res.status(201).json(newOrder);
+    res.status(201).json({
+      status: "success",
+      data: newOrder,
+    });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
