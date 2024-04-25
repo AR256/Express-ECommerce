@@ -66,6 +66,19 @@ const getAuthProducts = async (req, res) => {
   }
 };
 
+const searchByCategory = async (req, res) => {
+  try {
+    const products = await Product.find({category: req.query.category}).populate("seller");
+    res.json({
+      status: "success",
+      data: products,
+    });
+  }
+  catch (err) {
+    res.json({ message: err.message });
+  }
+};
+
 const getProductById = async (req, res) => {
   res.json({
     status: "success",
@@ -146,6 +159,7 @@ const getProduct = async (req, res, next) => {
 module.exports = {
   getAllProducts,
   getProductById,
+  searchByCategory,
   createProduct,
   updateProduct,
   deleteProduct,

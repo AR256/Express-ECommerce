@@ -4,6 +4,8 @@ const productController = require("../controllers/product");
 const auth = require("../middlewares/auth");
 
 router.get("/auth", auth.authenticateUser, productController.getAuthProducts);
+router.get("/auth/search", auth.authenticateUser, productController.searchByCategory);
+
 router.get("/", productController.getAllProducts);
 router.get(
   "/auth/:id",
